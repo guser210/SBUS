@@ -36,20 +36,20 @@ void SBUS_Encode(volatile uint16_t* channel, uint8_t size, volatile uint8_t *sbu
 	for (int i = 0; i < size; i++)
 	{
 		buffer |= (channel[i] & 0x07ff)<<bits;	// Append 11 bits of channel data MSB.
-		sbus[busIndex++] = buffer & 0xff;		    // assign 8 LSB to sbus bucket byte.
-		buffer >>= 8;							              // Shift 8 bits to the right, those bits were assigned to sbus bucket.
-		if ((bits += 3) == 9)					          // Increment bit count in buffer of bits and compare to 9.
+		sbus[busIndex++] = buffer & 0xff;	// assign 8 LSB to sbus bucket byte.
+		buffer >>= 8;				// Shift 8 bits to the right, those bits were assigned to sbus bucket.
+		if ((bits += 3) == 9)			// Increment bit count in buffer of bits and compare to 9.
 		{										//
-			sbus[busIndex++] = buffer & 0xff;	    // assign 8 bits to next sbus bucket to prevent overflow.
-			buffer >>= 8;						              // Shift 8 bits to the right, those bits were assigned to sbus bucket.
-			bits -= 8;							              // decrement bit count in buffer of bits.
+			sbus[busIndex++] = buffer & 0xff;// assign 8 bits to next sbus bucket to prevent overflow.
+			buffer >>= 8;			 // Shift 8 bits to the right, those bits were assigned to sbus bucket.
+			bits -= 8;			 // decrement bit count in buffer of bits.
 		}
 
 	}
-	sbus[busIndex++] = buffer & 0xff;			    // assign left over bits to next two buckets
+	sbus[busIndex++] = buffer & 0xff;		// assign left over bits to next two buckets
 	sbus[busIndex] = (buffer>>8) & 0xff;
 
-	sbus[23] = 0;								              //assing las 2 bytes incase they were assigned by mistake.
+	sbus[23] = 0;					//assing las 2 bytes incase they were assigned by mistake.
 	sbus[24] = 0;
 
 }
