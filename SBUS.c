@@ -23,10 +23,8 @@ void SBUS_Decode(volatile uint8_t *sbus, volatile uint16_t *channel, uint8_t siz
 }
 
 
-
 void SBUS_Encode(volatile uint16_t* channel, uint8_t size, volatile uint8_t *sbus)
 {
-	//uint8_t sbus[25] = { 0 }; // SBUS bucket buffer.
 	uint8_t bits = 0;	// bit counter for staging buffer.
 	uint8_t busIndex = 1;	// current bucket being assigned
 	uint32_t buffer = 0;	// staging buffer of bits, will append 11 bits per channel.
