@@ -47,7 +47,7 @@ void SBUS_Encode(volatile uint16_t* channel, uint8_t size, volatile uint8_t *sbu
 	sbus[busIndex++] = buffer & 0xff;		// assign left over bits to next two buckets
 	sbus[busIndex] = (buffer>>8) & 0xff;
 
-	sbus[23] = 0;					//assing las 2 bytes incase they were assigned by mistake.
+	sbus[23] = 0;					//assign las 2 bytes incase they were assigned by mistake.
 	sbus[24] = 0;
 
 }
